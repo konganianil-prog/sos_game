@@ -1,0 +1,20 @@
+.game-cell {
+  position: relative;
+}
+
+.sos-arrow-mark {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  color: #a6ffe4;
+  font: 700 clamp(9px, 1.4vw, 14px)/1 var(--font);
+  text-shadow: 0 0 8px #61e7d1;
+  pointer-events: none;
+}
+
+.sos-arrow-legend {
+  color: #a6ffe4;
+  font-size: 15px;
+  line-height: 1;
+  text-shadow: 0 0 8px #61e7d1;
+}

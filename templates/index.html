@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b1020">
+    <title>SOS — Strategy, made electric</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sos-arrows.css') }}">
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <header class="topbar">
+      <a class="brand" href="#" data-page="home" aria-label="SOS home"><span class="brand-mark">S<span>O</span>S</span><span class="brand-caption">THE STRATEGY GAME</span></a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-link active" data-page="home">Play</button>
+        <button class="nav-link" data-page="instructions">How to play</button>
+        <button class="nav-link" data-page="history">Match history</button>
+      </nav>
+      <button class="icon-button" id="sound-toggle" aria-label="Toggle sound" title="Toggle sound">♫</button>
+    </header>
+
+    <main>
+      <section id="home-page" class="page active">
+        <div class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="live-dot"></span> A CLASSIC, REIMAGINED</div>
+            <h1>Think ahead.<br>Make your <span class="gradient-text">move.</span></h1>
+            <p>Connect the letters. Complete the pattern. Outsmart whoever’s across the board.</p>
+            <div class="hero-actions">
+              <button class="button button-primary" id="start-game">Start a game <span>↗</span></button>
+              <button class="button button-quiet" data-page="instructions">How to play <span>→</span></button>
+            </div>
+            <div class="hero-stats"><div><strong>2</strong><span>ways to play</span></div><i></i><div><strong>4</strong><span>board sizes</span></div><i></i><div><strong>∞</strong><span>ways to win</span></div></div>
+          </div>
+          <div class="hero-art" aria-label="Decorative SOS game board">
+            <div class="art-glow"></div><div class="art-board" id="art-board"></div>
+            <div class="float-label label-top"><span class="label-dot blue-dot"></span> YOUR MOVE</div>
+            <div class="float-label label-bottom"><span class="tiny-sos">S O S</span><span>+1 POINT</span></div>
+          </div>
+        </div>
+
+        <section class="setup-panel" id="setup-panel">
+          <div class="section-heading"><div><div class="eyebrow">CHOOSE YOUR MATCH</div><h2>Set the board</h2></div><span class="step-tag">01 <i>/</i> 02</span></div>
+          <div class="setup-grid">
+            <div class="setup-control"><label>GAME MODE</label><div class="mode-options"><button class="mode-option selected" data-mode="single"><span class="mode-icon">✦</span><span><b>Solo</b><small>vs. computer</small></span><i>✓</i></button><button class="mode-option" data-mode="two"><span class="mode-icon">◉</span><span><b>Two players</b><small>play together</small></span><i>✓</i></button></div></div>
+            <div class="setup-control"><label>BOARD SIZE</label><div class="size-options"><button data-size="5" class="size-option selected">5<span>×5</span></button><button data-size="6" class="size-option">6<span>×6</span></button><button data-size="7" class="size-option">7<span>×7</span></button><button data-size="8" class="size-option">8<span>×8</span></button></div></div>
+            <div class="setup-control" id="difficulty-control"><label>DIFFICULTY</label><div class="select-wrap"><select id="difficulty"><option value="easy">Easy — warming up</option><option value="medium" selected>Medium — getting clever</option><option value="hard">Hard — no mercy</option></select><span>⌄</span></div></div>
+            <div class="setup-control"><label>PLAYER NAMES</label><div class="name-inputs"><input id="player-one-name" maxlength="24" value="Player 1" aria-label="Player one name"><input id="player-two-name" maxlength="24" value="Player 2" aria-label="Player two or computer name"></div></div>
+          </div>
+          <div class="setup-footer"><span><span class="live-dot"></span> Ready when you are</span><button class="button button-primary" id="launch-game">Let’s play <span>→</span></button></div>
+        </section>
+
+        <section class="feature-row"><article><span class="feature-icon purple">◈</span><div><b>Smart by design</b><p>Play against an AI that knows when to score—and when to block.</p></div></article><article><span class="feature-icon cyan">⌁</span><div><b>Your game, your pace</b><p>Keep the streak going after every SOS. The board is yours.</p></div></article><article><span class="feature-icon pink">◷</span><div><b>Every match counts</b><p>Your results are saved, ready to revisit whenever you like.</p></div></article></section>
+      </section>
+
+      <section id="game-page" class="page">
+        <div class="game-topline"><button class="back-button" id="back-home">← <span>Back to setup</span></button><div class="game-top-actions"><span class="match-pill"><span class="live-dot"></span> LIVE MATCH</span><button class="text-button" id="restart-game">↻ Restart</button><button class="text-button" id="pause-game">Ⅱ Pause</button></div></div>
+        <div class="game-layout">
+          <aside class="score-panel">
+            <div class="panel-label">THE SCOREBOARD <span class="live-dot"></span></div>
+            <article class="player-card player-one-card"><div class="player-avatar avatar-one">1</div><div class="player-info"><span id="score-name-one">Player 1</span><small id="score-role-one">YOU</small></div><strong id="score-one">0</strong><span class="player-turn-dot"></span></article>
+            <div class="score-divider"><span>VS</span></div>
+            <article class="player-card player-two-card"><div class="player-avatar avatar-two">2</div><div class="player-info"><span id="score-name-two">Player 2</span><small id="score-role-two">PLAYER 2</small></div><strong id="score-two">0</strong><span class="player-turn-dot"></span></article>
+            <div class="stat-card"><span>COMBINATIONS</span><strong id="combination-count">0</strong><small>total SOS patterns</small></div>
+            <div class="stat-card timer-stat"><span>TIME PLAYED</span><strong id="game-timer">00:00</strong><small>take your time</small></div>
+            <button class="sound-row" id="sound-toggle-game"><span>♫</span> Sound effects <b id="sound-state">ON</b></button>
+          </aside>
+          <section class="board-section">
+            <div class="turn-banner" id="turn-banner"><span class="turn-pulse"></span><span id="turn-message">Player 1’s turn</span><span class="turn-hint">CHOOSE A LETTER, THEN A CELL</span></div>
+            <div class="board-wrap"><div id="game-board" class="game-board" role="grid" aria-label="SOS game board"></div><div id="pause-overlay" class="pause-overlay hidden"><span>Ⅱ</span><b>Game paused</b><button class="button button-primary" id="resume-game">Resume game</button></div></div>
+            <div class="board-footer"><div class="letter-choice"><span>PLACE A</span><button class="letter-button selected" data-letter="S">S</button><button class="letter-button" data-letter="O">O</button></div><div class="combo-legend"><span class="sos-arrow-legend">→</span> SOS direction</div></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="history-page" class="page">
+        <div class="subpage-head"><div class="eyebrow">YOUR JOURNEY</div><h1>Match <span class="gradient-text">history.</span></h1><p>Every game tells a story. Here are yours.</p></div>
+        <div class="history-panel"><div class="history-heading"><div><h2>Past matches</h2><span id="history-count">Your recent results</span></div><button class="text-button" id="refresh-history">↻ Refresh</button></div><div class="history-table-wrap"><table class="history-table"><thead><tr><th>PLAYERS</th><th>MODE</th><th>BOARD</th><th>RESULT</th><th>WINNER</th><th>DATE</th></tr></thead><tbody id="history-body"><tr><td colspan="6" class="empty-history">Loading your matches…</td></tr></tbody></table></div></div>
+      </section>
+
+      <section id="instructions-page" class="page">
+        <div class="subpage-head"><div class="eyebrow">THE RULES ARE SIMPLE</div><h1>How to play <span class="gradient-text">SOS.</span></h1><p>A little strategy goes a long way. Here’s everything you need to know.</p></div>
+        <div class="rules-layout"><div class="rules-main"><article class="rule-card"><span class="rule-number">01</span><div><h2>The goal</h2><p>Make as many <strong>S–O–S</strong> patterns as you can. A pattern can run horizontally, vertically, or diagonally—in either direction.</p><div class="example-pattern"><span>S</span><span>O</span><span>S</span><small>HORIZONTAL</small><span class="example-divider"></span><span>S</span><span class="example-diagonal">O</span><span>S</span><small>DIAGONAL</small></div></div></article><article class="rule-card"><span class="rule-number">02</span><div><h2>Take your turn</h2><p>Choose either <b class="text-s">S</b> or <b class="text-o">O</b>, then place it in any empty square. Players take turns; in Solo, the computer plays too.</p><div class="tip-box">✦ <span>You choose the letter every turn—use that to set up a pattern or block one.</span></div></div></article><article class="rule-card"><span class="rule-number">03</span><div><h2>Score &amp; keep going</h2><p>Each new SOS you complete earns one point. If your move makes multiple patterns, you score for each one—and you get another turn.</p><div class="score-example"><span class="text-s">S</span><span class="text-o">O</span><span class="text-s">S</span><i>→</i><b>+1 point</b><small>ONE NEW COMBINATION</small></div></div></article><article class="rule-card"><span class="rule-number">04</span><div><h2>Game over</h2><p>When every square is filled, the player with the most SOS patterns wins. A tied score means it’s a draw. Good luck!</p></div></article></div><aside class="rules-aside"><div class="mini-board" id="mini-board"></div><div class="aside-tip"><span>✦</span><b>Pro tip</b><p>Before you place a letter, check all eight directions. One move can complete more than one SOS at a time.</p></div><button class="button button-primary full-button" data-page="home">Ready to play? <span>→</span></button></aside></div>
+      </section>
+    </main>
+
+    <footer><span class="brand-mark small">S<span>O</span>S</span><span>Good games start with a good move.</span><span>MADE FOR THE LOVE OF PLAY</span></footer>
+    <div id="toast" class="toast" role="status"></div>
+    <div id="gameover-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-card"><div class="celebration" id="celebration">✦</div><div class="eyebrow">MATCH COMPLETE</div><h2 id="modal-title">Beautiful game.</h2><p id="modal-result"></p><div class="modal-score"><div><span id="modal-name-one">Player 1</span><b id="modal-score-one">0</b></div><i>—</i><div><span id="modal-name-two">Player 2</span><b id="modal-score-two">0</b></div></div><div class="modal-actions"><button class="button button-quiet" id="modal-home">Back to home</button><button class="button button-primary" id="play-again">Play again <span>→</span></button></div></div></div>
+    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+  </body>
+</html>
